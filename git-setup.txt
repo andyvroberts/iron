@@ -1,0 +1,62 @@
+When starting GIT
+1. Start the ssh agent "eval $(ssh-agent)"
+2. Add your ssh identity "ssh-add ~/.ssh/id_rsa"
+3. continue.
+
+git add <filename>
+git commit -m 'reason for change text'
+git push bunker master
+
+git fetch origin master
+
+=======================================================================================
+# create remote repository:
+mkdir /path/to/your/project
+cd /path/to/your/project
+git init
+git remote add bunker git@bitbucket.org:avrpvrt/bunker.git
+
+# or - assuming you have already set up SSH, to clone a remote repository
+git clone git@bitbucket.org:avrpvrt/iron.git
+
+# setup SSH and keygen for git push/pull operations
+# https://help.github.com/articles/generating-ssh-keys/
+# https://confluence.atlassian.com/bitbucket/set-up-ssh-for-git-728138079.html
+
+# 1. do any ssh keys already exist?
+ls -al ~/.ssh
+
+# 2. if not then generate a new public private key pair
+ssh-keygen
+
+# 3. Create the SSH config file "~/.ssh/config"
+Host bitbucket.org
+ IdentifyFile ~/.ssh/id_rsa
+
+# 4. restart the bash shell and start the ssh agent
+eval $(ssh-agent)
+ssh-add ~/.ssh/id_rsa
+
+# 5. check the ssh agent has your identity
+ssh-add -l
+
+# 6. install the public key on bitbucket project
+copy the contents of id_rsa.pub without the final end-of-line character
+or 
+cat ~/.ssh/id_rsa.pub
+
+# 7. test the connection by runing the command
+ssh -T git@bitbucket.org
+
+This will ask if you want to continue connecting.  Type in yes and bitbucket 
+will be added to your list of known hosts config file.
+
+# 8. navigate to the git config file in "<your repo>/.git/config"
+from your repo issue command "cat .git/config" to see if you are set up correctly for ssh.
+
+# 9. Your user name be unrecognised in which case edit your name and email with
+git config --global --edit
+
+
+=======================================================================================
+https://github.com/github/gitignore

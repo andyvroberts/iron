@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="Obdurate.SlideMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Obdurate"
+             mc:Ignorable="d"
+             d:DesignHeight="350" d:DesignWidth="525">
+  <UserControl.Resources>
+    <Style TargetType="DockPanel">
+      <Setter Property="Background" Value="{StaticResource WindowBrush}"/>
+    </Style>
+  </UserControl.Resources>
+
+  <Grid x:Name="SlideMenuGrid">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="10"/>
+      <ColumnDefinition Width="100"/>
+    </Grid.ColumnDefinitions>
+    
+    <DockPanel Grid.Column="0" Name="menuDock"
+               Height="{Binding ElementName=SlideMenuGrid, Path=ActualHeight}" 
+               LastChildFill="False">
+      
+      <Button Name="openMenuButton" 
+              Height="50" HorizontalAlignment="Stretch" DockPanel.Dock="Top"
+              Style="{StaticResource NavButton}"
+              Visibility="Visible"
+              Click="OpenMenuPanel">
+        <Button.Content>
+          <Path Fill="{StaticResource TextBrush}">
+            <Path.Data>
+              <PathGeometry>
+                <PathGeometry.Figures>
+                  <PathFigure StartPoint="1,40" IsClosed="True">
+                    <LineSegment Point="1,45"/>
+                    <LineSegment Point="9,45"/>
+                    <LineSegment Point="9,40"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,33" IsClosed="True">
+                    <LineSegment Point="1,38"/>
+                    <LineSegment Point="9,38"/>
+                    <LineSegment Point="9,33"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,26" IsClosed="True">
+                    <LineSegment Point="1,31"/>
+                    <LineSegment Point="9,31"/>
+                    <LineSegment Point="9,26"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,19" IsClosed="True">
+                    <LineSegment Point="1,24"/>
+                    <LineSegment Point="9,24"/>
+                    <LineSegment Point="9,19"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,12" IsClosed="True">
+                    <LineSegment Point="1,17"/>
+                    <LineSegment Point="9,17"/>
+                    <LineSegment Point="9,12"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,5" IsClosed="True">
+                    <LineSegment Point="1,10"/>
+                    <LineSegment Point="9,10"/>
+                    <LineSegment Point="9,5"/>
+                  </PathFigure>
+                </PathGeometry.Figures>
+              </PathGeometry>
+            </Path.Data>
+          </Path>
+        </Button.Content>
+        <Button.Triggers>
+          <EventTrigger RoutedEvent="Button.Click">
+            <EventTrigger.Actions>
+              <BeginStoryboard>
+                <Storyboard TargetProperty="Width" TargetName="menuPanel">
+                  <DoubleAnimation From="0" To="100" Duration="0:0:0.5" AccelerationRatio="0.25" />
+                </Storyboard>
+              </BeginStoryboard>
+            </EventTrigger.Actions>
+          </EventTrigger>
+        </Button.Triggers>
+      </Button>
+
+      <Button Name="closeMenuButton" 
+              Height="50" HorizontalAlignment="Stretch" DockPanel.Dock="Top"
+              Style="{StaticResource NavButton}"
+              Visibility="Collapsed"
+              Click="CloseMenuPanel">
+        <Button.Content>
+          <Path Fill="{StaticResource TextBrush}">
+            <Path.Data>
+              <PathGeometry>
+                <PathGeometry.Figures>
+                  <PathFigure StartPoint="1,33" IsClosed="True">
+                    <LineSegment Point="1,45"/>
+                    <LineSegment Point="9,45"/>
+                    <LineSegment Point="9,33"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,19" IsClosed="True">
+                    <LineSegment Point="1,31"/>
+                    <LineSegment Point="9,31"/>
+                    <LineSegment Point="9,19"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,5" IsClosed="True">
+                    <LineSegment Point="1,17"/>
+                    <LineSegment Point="9,17"/>
+                    <LineSegment Point="9,5"/>
+                  </PathFigure>
+                </PathGeometry.Figures>
+              </PathGeometry>
+            </Path.Data>
+          </Path>
+        </Button.Content>
+        <Button.Triggers>
+          <EventTrigger RoutedEvent="Button.Click">
+            <EventTrigger.Actions>
+              <BeginStoryboard>
+                <Storyboard TargetProperty="Width" TargetName="menuPanel">
+                  <DoubleAnimation From="100" To="0" Duration="0:0:0.5" DecelerationRatio="0.25" />
+                </Storyboard>
+              </BeginStoryboard>
+            </EventTrigger.Actions>
+          </EventTrigger>
+        </Button.Triggers>
+      </Button>
+
+      <Button Height="15" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom" 
+              Style="{StaticResource NavButton}"
+              Click="BackButton">
+        <Button.Content>
+          <Path Fill="{StaticResource TextBrush}" Data="M 0 6 L 6 1 L 6 11 Z"/>
+        </Button.Content>
+      </Button>
+    </DockPanel>
+
+    <StackPanel Name="menuPanel" Grid.Column="1" 
+                Background="{StaticResource MenuControlBrush}"
+                HorizontalAlignment="Left"
+                Orientation="Vertical"
+                LostFocus="MenuPanelLostFocus"
+                Width="0">
+      <Label Content="EDW"
+             Style="{StaticResource labelMenu}"
+             IsHitTestVisible="True"
+             PreviewMouseDown="BusinessUnitButton"/>
+      <Label Content="Files..." 
+             Style="{StaticResource labelMenu}"
+             IsHitTestVisible="True"
+             PreviewMouseDown="filesMenuButton"/>
+    </StackPanel>
+
+  </Grid>
+</UserControl>

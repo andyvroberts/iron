@@ -1,0 +1,66 @@
+﻿<Page x:Class="Arduous.Views.DataViewer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Arduous.Views"
+      xmlns:UsCn="clr-namespace:Arduous.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="550" 
+      Unloaded="Page_Unloaded"
+      Title="DataViewer" WindowTitle="Arduous (Data Viewer)">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="b2v"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="21"/>
+        </Grid.RowDefinitions>
+
+        <UsCn:SlideOutList Grid.Column="0" Grid.ColumnSpan="3"
+                       Grid.Row="1" Grid.RowSpan="3"
+                       x:Name="slideOut"
+                       Panel.ZIndex="99"/>
+
+        <Label Grid.Column="2"
+           Grid.Row="1"
+           Content="Search"
+           Margin="5,0,5,0"
+           HorizontalAlignment="Right" VerticalContentAlignment="Center"
+           Style="{StaticResource CheckLabel}"/>
+
+        <TextBox Grid.Column="3"
+             Grid.Row="1"
+             Name="dispRows"
+             Margin="2,4,0,4"
+             KeyDown="SearchTextKeyDown"
+             Style="{StaticResource InputText}"/>
+
+        <DataGrid Grid.Row="2"
+              Grid.Column="2" Grid.ColumnSpan="2"
+              Name="recordList"
+              IsReadOnly="True"
+              AutoGenerateColumns="False">
+            <DataGrid.Columns>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <UsCn:StatusPageBottom Grid.Column="2"
+                               Grid.Row="4"
+                               Grid.ColumnSpan="2"
+                               x:Name="viewerStatusBar"/>
+
+
+    </Grid>
+</Page>

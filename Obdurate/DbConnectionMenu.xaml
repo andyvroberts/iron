@@ -1,0 +1,190 @@
+﻿<UserControl x:Class="Obdurate.DbConnectionMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Obdurate"
+             xmlns:conv="clr-namespace:Obdurate.converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="110">
+  <UserControl.Resources>
+    <BooleanToVisibilityConverter x:Key="b2v"/>
+    <conv:InvertBooleanToVisibility x:Key="ib2v"/>
+
+    <Style TargetType="DockPanel">
+      <Setter Property="Background" Value="{StaticResource WindowBrush}"/>
+    </Style>
+  </UserControl.Resources>
+
+  <Grid Name="dbMenuGrid">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="100"/>
+      <ColumnDefinition Width="10"/>
+    </Grid.ColumnDefinitions>
+
+    <DockPanel Grid.Column="1"
+               Name="menuDock"
+               Height="{Binding ElementName=dbMenuGrid, Path=ActualHeight}"
+               LastChildFill="False">
+
+      <Button Name="openDbMenu" 
+              Height="50" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom"
+              Style="{StaticResource NavButton}"
+              Visibility="Visible"
+              Click="OpenDbMenuPanel">
+        <Button.Content>
+          <Path Fill="{StaticResource TextBrush}">
+            <Path.Data>
+              <PathGeometry>
+                <PathGeometry.Figures>
+                  <PathFigure StartPoint="1,40" IsClosed="True">
+                    <LineSegment Point="1,45"/>
+                    <LineSegment Point="9,45"/>
+                    <LineSegment Point="9,40"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,33" IsClosed="True">
+                    <LineSegment Point="1,38"/>
+                    <LineSegment Point="9,38"/>
+                    <LineSegment Point="9,33"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,26" IsClosed="True">
+                    <LineSegment Point="1,31"/>
+                    <LineSegment Point="9,31"/>
+                    <LineSegment Point="9,26"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,19" IsClosed="True">
+                    <LineSegment Point="1,24"/>
+                    <LineSegment Point="9,24"/>
+                    <LineSegment Point="9,19"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,12" IsClosed="True">
+                    <LineSegment Point="1,17"/>
+                    <LineSegment Point="9,17"/>
+                    <LineSegment Point="9,12"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,5" IsClosed="True">
+                    <LineSegment Point="1,10"/>
+                    <LineSegment Point="9,10"/>
+                    <LineSegment Point="9,5"/>
+                  </PathFigure>
+                </PathGeometry.Figures>
+              </PathGeometry>
+            </Path.Data>
+          </Path>
+        </Button.Content>
+      </Button>
+
+      <Button Name="closeDbMenu" 
+              Height="50" HorizontalAlignment="Stretch" DockPanel.Dock="Bottom"
+              Style="{StaticResource NavButton}"
+              Visibility="Collapsed"
+              Click="CloseDbMenuPanel">
+        <Button.Content>
+          <Path Fill="{StaticResource TextBrush}">
+            <Path.Data>
+              <PathGeometry>
+                <PathGeometry.Figures>
+                  <PathFigure StartPoint="1,33" IsClosed="True">
+                    <LineSegment Point="1,45"/>
+                    <LineSegment Point="9,45"/>
+                    <LineSegment Point="9,33"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,19" IsClosed="True">
+                    <LineSegment Point="1,31"/>
+                    <LineSegment Point="9,31"/>
+                    <LineSegment Point="9,19"/>
+                  </PathFigure>
+                  <PathFigure StartPoint="1,5" IsClosed="True">
+                    <LineSegment Point="1,17"/>
+                    <LineSegment Point="9,17"/>
+                    <LineSegment Point="9,5"/>
+                  </PathFigure>
+                </PathGeometry.Figures>
+              </PathGeometry>
+            </Path.Data>
+          </Path>
+        </Button.Content>
+      </Button>
+
+    </DockPanel>
+
+    <Popup Name="connectionPanel" Grid.Column="1"
+           Height="{Binding ElementName=SlideMenuGrid, Path=ActualHeight}"
+           Width="150"
+           PlacementTarget="{Binding ElementName=dbMenuGrid}"
+           Placement="Center"
+           StaysOpen="False"
+           Closed="connectionPanel_Closed">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="8"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="8"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="10"/>
+          <RowDefinition Height="20"/>
+          <RowDefinition Height="24"/>
+          <RowDefinition Height="20"/>
+          <RowDefinition Height="24"/>
+          <RowDefinition Height="20"/>
+          <RowDefinition Height="24"/>
+          <RowDefinition Height="28"/>
+          <RowDefinition Height="20"/>
+          <RowDefinition Height="24"/>
+          <RowDefinition Height="20"/>
+          <RowDefinition Height="24"/>
+          <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" Grid.Column="1"
+               Content="SQL Server:" 
+               Style="{StaticResource labelSmall}"/>
+        <TextBox Grid.Row="2" Grid.Column="1" 
+                 Name="connServer"
+                 Focusable="True"
+                 GotFocus="TextBoxHasFocus"
+                 Style="{StaticResource inputText}"/>
+        <Label Grid.Row="3" Grid.Column="1"
+               Content="Database;"
+               Style="{StaticResource labelSmall}"/>
+        <TextBox Grid.Row="4" Grid.Column="1"
+                 Name="connDatabase"
+                 GotFocus="TextBoxHasFocus"
+                 Style="{StaticResource inputText}"/>
+        <Label Grid.Row="5" Grid.Column="1"
+               Content="Schema;"
+               Style="{StaticResource labelSmall}"/>
+        <TextBox Grid.Row="6" Grid.Column="1"
+                 Name="connSchema"
+                 GotFocus="TextBoxHasFocus"
+                 Text="dbo"
+                 Style="{StaticResource inputText}"/>
+        <CheckBox Grid.Row="7" Grid.Column="1" 
+                  Name="winAuth" 
+                  VerticalAlignment="Center"
+                  Content="Windows Authentication"
+                  Style="{StaticResource checkList}"
+                  IsChecked="True"/>
+        <Label Grid.Row="8" Grid.Column="1"
+               Visibility="{Binding Path=IsChecked, ElementName=winAuth, Converter={StaticResource ib2v}}"
+               Content="User;"
+               Style="{StaticResource labelSmall}"/>
+        <TextBox Grid.Row="9" Grid.Column="1"
+                 Visibility="{Binding Path=IsChecked, ElementName=winAuth, Converter={StaticResource ib2v}}"
+                 Name="connUser"
+                 GotFocus="TextBoxHasFocus"
+                 Style="{StaticResource inputText}"/>
+        <Label Grid.Row="10" Grid.Column="1"
+               Visibility="{Binding Path=IsChecked, ElementName=winAuth, Converter={StaticResource ib2v}}"
+               Content="Password:"
+               Style="{StaticResource labelSmall}"/>
+        <PasswordBox Grid.Row="11" Grid.Column="1" 
+                     Visibility="{Binding Path=IsChecked, ElementName=winAuth, Converter={StaticResource ib2v}}"
+                     Name="connPassword" 
+                     />
+      </Grid>
+    </Popup>
+
+  </Grid>
+
+</UserControl>

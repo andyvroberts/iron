@@ -1,0 +1,243 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Obdurate">
+
+  <SolidColorBrush x:Key="WindowBrush" Color="#37797F"/>
+  <SolidColorBrush x:Key="ActionTextBrush" Color="Black"/>
+  <SolidColorBrush x:Key="TextBrush" Color="White"/>
+  <SolidColorBrush x:Key="BorderBrush" Color="White"/>
+  <SolidColorBrush x:Key="ErrorControlBrush" Color="#F59595"/>
+  <SolidColorBrush x:Key="ControlBrush2" Color="#22EBFF"/>
+  <SolidColorBrush x:Key="ControlBrush3" Color="#6EF2FF"/>
+  <SolidColorBrush x:Key="ControlBrush4" Color="#11767F"/>
+  <SolidColorBrush x:Key="ControlBrush" Color="#1BBCCC"/>
+
+  <SolidColorBrush x:Key="AltTextBrush" Color="#1BBCCC"/>
+  <SolidColorBrush x:Key="AltBorderBrush" Color="#1BBCCC"/>
+  <SolidColorBrush x:Key="AltControlBrush" Color="White"/>
+
+  <SolidColorBrush x:Key="MenuControlBrush" Color="White"/>
+  <SolidColorBrush x:Key="MenuTextBrush" Color="Black"/>
+  <SolidColorBrush x:Key="MenuAltControlBrush" Color="Black"/>
+  <SolidColorBrush x:Key="MenuAltTextBrush" Color="White"/>
+
+  <SolidColorBrush x:Key="GridAlternation0" Color="WhiteSmoke"/>
+  <SolidColorBrush x:Key="GridAlternation1" Color="LightGray"/>
+
+  <SolidColorBrush x:Key="DocReaderBrush" Color="LightGray"/>
+
+  <Style TargetType="{x:Type Border}" x:Key="StandardBorder">
+    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+    <Setter Property="BorderThickness" Value="3"/>
+    <Setter Property="Margin" Value="0"/>
+  </Style>
+
+  <Style TargetType="{x:Type Border}" x:Key="NoBorder">
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Margin" Value="0"/>
+  </Style>
+
+  <Style TargetType="{x:Type Label}" x:Key="labelMedium">
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="FontWeight" Value="Medium"/>
+    <Setter Property="FontSize" Value="11"/>
+    <Setter Property="FontFamily" Value="Tahoma"/>
+  </Style>
+
+  <Style TargetType="{x:Type Label}" x:Key="labelSmall">
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="FontWeight" Value="Medium"/>
+    <Setter Property="FontSize" Value="9"/>
+    <Setter Property="FontFamily" Value="Tahoma"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+  </Style>
+
+  <Style TargetType="{x:Type Label}" x:Key="labelStatus">
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="FontWeight" Value="Light"/>
+    <Setter Property="FontSize" Value="9"/>
+    <Setter Property="FontFamily" Value="Tahoma"/>
+  </Style>
+
+  <Style TargetType="{x:Type Label}" x:Key="labelMenu">
+    <Setter Property="Background" Value="{StaticResource MenuControlBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource MenuTextBrush}"/>
+    <Setter Property="FontFamily" Value="Eurostyle"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Height" Value="35"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="Margin" Value="0,0,0,2"/>
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Background" Value="{StaticResource MenuAltControlBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource MenuAltTextBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="{x:Type CheckBox}" x:Key="optionsList">
+    <Setter Property="FontFamily" Value="Tahoma"/>
+    <Setter Property="FontSize" Value="10"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+  </Style>
+
+  <Style TargetType="{x:Type CheckBox}" x:Key="checkList">
+    <Setter Property="FontFamily" Value="Tahoma"/>
+    <Setter Property="FontSize" Value="10"/>
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+  </Style>
+
+  <Style TargetType="{x:Type CheckBox}" x:Key="checkAllInList">
+    <Setter Property="FontFamily" Value="Verdana"/>
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="FontSize" Value="10"/>
+    <Setter Property="Opacity" Value="0.6"/>
+  </Style>
+
+  <Style TargetType="{x:Type RadioButton}" x:Key="radioList">
+    <Setter Property="FontFamily" Value="Tahoma"/>
+    <Setter Property="FontSize" Value="10"/>
+  </Style>
+
+  <Style TargetType="{x:Type TextBox}" x:Key="inputText">
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Background" Value="{StaticResource AltControlBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource ActionTextBrush}"/>
+  </Style>
+
+  <Style TargetType="{x:Type TextBox}" x:Key="inputTextSmall">
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Background" Value="{StaticResource AltControlBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource ActionTextBrush}"/>
+    <Setter Property="FontSize" Value="9"/>
+  </Style>
+
+  <Style TargetType="{x:Type TextBlock}" x:Key="textStatus">
+    <Setter Property="Background" Value="{StaticResource WindowBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="FontFamily" Value="Tahoma"/>
+    <Setter Property="FontSize" Value="9"/>
+  </Style>
+
+  <Style TargetType="{x:Type Button}" x:Key="actionButton">
+    <Setter Property="FontFamily" Value="Tahoma"/>
+    <Setter Property="FontSize" Value="10"/>
+    <Setter Property="Background" Value="{StaticResource ControlBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+  </Style>
+
+  <Style TargetType="{x:Type Button}" x:Key="NavButton">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Border BorderBrush="Transparent" Background="Transparent"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+          <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            RecognizesAccessKey="True"/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter Property="Cursor" Value="Hand"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+  <Style TargetType="{x:Type TextBox}" x:Key="actionBox">
+    <Setter Property="FontFamily" Value="Tahoma"/>
+    <Setter Property="FontSize" Value="10"/>
+    <Setter Property="Background" Value="{StaticResource AltControlBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource ActionTextBrush}"/>
+  </Style>
+
+  <Style TargetType="{x:Type TreeViewItem}" x:Key="businessUnitItem">
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="FontSize" Value="10"/>
+    <Setter Property="IsExpanded" Value="True"/>
+  </Style>
+
+
+
+
+
+  <Style TargetType="{x:Type ListView}" x:Key="StandardList">
+    <Setter Property="Background" Value="{StaticResource WindowBrush}"/>
+  </Style>
+
+  <Style TargetType="{x:Type ListViewItem}" x:Key="StandardListItem">
+    <Setter Property="Margin" Value="0"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ListViewItem">
+          <Border Name="Border" 
+                  Padding="2" 
+                  SnapsToDevicePixels="true" 
+                  Background="{TemplateBinding Background}">
+            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected" Value="true">
+              <Setter TargetName="Border"
+                      Property="Background" Value="{StaticResource AltControlBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+              <Setter Property="Foreground" Value="{StaticResource AltTextBrush}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+        <Setter Property="Background" Value="{StaticResource ControlBrush2}"/>
+      </Trigger>
+      <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+        <Setter Property="Background" Value="{StaticResource ControlBrush3}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+
+  <Style TargetType="{x:Type DataGrid}" x:Key="dataContentGrid">
+    <Setter Property="Background" Value="{StaticResource WindowBrush}"/>
+    <Setter Property="AlternationCount" Value="5"/>
+  </Style>
+
+  <Style TargetType="{x:Type DataGridColumnHeader}">
+    <Setter Property="Background" Value="{StaticResource ControlBrush2}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+  </Style>
+  
+  <Style TargetType="DataGridRow">
+    <Style.Triggers>
+      <Trigger Property="AlternationIndex" Value="0">
+        <Setter Property="Background" Value="{StaticResource GridAlternation0}"/>
+      </Trigger>
+      <Trigger Property="AlternationIndex" Value="1">
+        <Setter Property="Background" Value="{StaticResource GridAlternation0}"/>
+      </Trigger>
+      <Trigger Property="AlternationIndex" Value="2">
+        <Setter Property="Background" Value="{StaticResource GridAlternation1}"/>
+      </Trigger>
+      <Trigger Property="AlternationIndex" Value="3">
+        <Setter Property="Background" Value="{StaticResource GridAlternation0}"/>
+      </Trigger>
+      <Trigger Property="AlternationIndex" Value="4">
+        <Setter Property="Background" Value="{StaticResource GridAlternation1}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+
+
+
+</ResourceDictionary>

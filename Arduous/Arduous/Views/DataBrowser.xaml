@@ -1,0 +1,166 @@
+﻿<Page x:Class="Arduous.Views.DataBrowser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Arduous.Views"
+      xmlns:conv="clr-namespace:Arduous.Converters"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="550" 
+      KeepAlive="True"
+      Title="DataBrowser" WindowTitle="Arduous (Data Browser)">
+
+  <Page.CommandBindings>
+    <CommandBinding Command="Open"
+                    CanExecute="OpenCanExecute"
+                    Executed="OpenExecuted"/>
+  </Page.CommandBindings>
+
+  <Page.InputBindings>
+    <KeyBinding Command="ApplicationCommands.Open"
+                Gesture="Ctrl+O"/>
+  </Page.InputBindings>
+
+  <Page.Resources>
+    <conv:BytesToDisplaySize x:Key="b2s"/>
+    <BooleanToVisibilityConverter x:Key="b2v"/>
+    <CollectionViewSource x:Key="FileListView"/>
+
+    <DataTemplate x:Key="FileListTemplate">
+      <Grid Name="fileListGrid" ShowGridLines="False">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="24"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="3*"/>
+          <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="3"
+                   FontWeight="ExtraBlack" FontSize="10" Text="{Binding FileName}"/>
+        <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="3"
+                   FontWeight="Medium" FontSize="10" Text="{Binding FileSize, Converter={StaticResource b2s}}"/>
+      </Grid>
+    </DataTemplate>
+  </Page.Resources>
+
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="10"/>
+      <ColumnDefinition Width="50"/>
+      <ColumnDefinition Width="5"/>
+      <ColumnDefinition Width="3*"/>
+      <ColumnDefinition Width="160"/>
+      <ColumnDefinition Width="10"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="10"/>
+      <RowDefinition Height="25"/>
+      <RowDefinition Height="25"/>
+      <RowDefinition Height="1*"/>
+      <RowDefinition Height="1*"/>
+      <RowDefinition Height="1*"/>
+      <RowDefinition Height="21"/>
+    </Grid.RowDefinitions>
+
+    <Button Grid.Row="1" Grid.Column="1"
+            Content="Folder:"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            Click="FolderClick"
+            Style="{StaticResource ActionButton}"/>
+
+    <TextBox Grid.Row="1" Grid.Column="3"  Grid.ColumnSpan="2" 
+             Name="folderText" 
+             HorizontalAlignment="Stretch"
+             Style="{StaticResource InputText}"
+             KeyDown="FolderTextKeyDown">
+      <TextBox.ContextMenu>
+        <ContextMenu>
+          <MenuItem Header="Browse" Command="ApplicationCommands.Open"/>
+          <Separator/>
+          <MenuItem Header="Copy" Command="ApplicationCommands.Copy"/>
+          <MenuItem Header="Paste" Command="ApplicationCommands.Paste"/>
+        </ContextMenu>
+      </TextBox.ContextMenu>
+    </TextBox>
+
+    <CheckBox Grid.Row="2" Grid.Column="3"
+              Name="subFolders"
+              Content="include sub-folders"
+              IsChecked="False"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Left"
+              Click="SubFoldersClick"
+              Style="{StaticResource CheckList}"/>
+
+    <Border Grid.Row="3" Grid.RowSpan="3" Grid.Column="3"
+            Style="{StaticResource NoBorder}">
+      <ListView Name="fileList" Margin="0"
+                ItemTemplate="{StaticResource FileListTemplate}"
+                ItemContainerStyle="{StaticResource StandardListItem}"
+                ItemsSource="{Binding Source={StaticResource FileListView}}"
+                Style="{StaticResource StandardList}"
+                AlternationCount="2"
+                MouseDoubleClick="ViewFile"
+                IsSynchronizedWithCurrentItem="True"
+                LostFocus="fileListLostFocus"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch"/>
+    </Border>
+
+    <Grid Name="fileTypesCheck" 
+          Visibility="Hidden" 
+          Grid.Column="4" Grid.Row="3" Grid.RowSpan="3" 
+          Margin="5,0,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="10"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="25"/>
+        <RowDefinition Height="24"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <Label Grid.Column="1" Grid.Row="0" 
+             Style="{StaticResource ControlLabel}"
+             Content="Select File Types"/>
+      <CheckBox Name="selectAllFileTypes" 
+                Grid.Column="1" Grid.Row="1" 
+                Content="All" 
+                Margin="10,0,0,0" IsChecked="True" 
+                VerticalAlignment="Bottom"
+                Style="{StaticResource CheckListSpecial}" 
+                Click="SelectOrDeselectAllExtensions"/>
+      <ScrollViewer Name="fileTypesCheckScroller" 
+                    Grid.Column="1" Grid.Row="2" 
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Hidden">
+        <StackPanel Name="fileTypesCheckPanel" 
+                    Orientation="Vertical"/>
+      </ScrollViewer>
+    </Grid>
+
+    <StatusBar Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="7"
+               Name="browserStatusBar"
+               Style="{StaticResource StatusView}"
+               HorizontalAlignment="Left"
+               HorizontalContentAlignment="Stretch">
+      <StatusBarItem Name="errorElipse" Visibility="{Binding Path=IsError, Converter={StaticResource b2v}}">
+        <Ellipse Width="10" Height="10" 
+               Visibility="Visible"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Center"
+               Fill="{StaticResource ErrorBrush}">
+        </Ellipse>
+      </StatusBarItem>
+      <Separator Visibility="{Binding Path=IsError, Converter={StaticResource b2v}}"/>
+      <StatusBarItem>
+        <TextBlock Name="statusText"
+                   Style="{StaticResource StatusBlock}"
+                   Text="{Binding Path=StatusMessage}"/>
+      </StatusBarItem>
+    </StatusBar>
+
+  </Grid>
+</Page>
