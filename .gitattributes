@@ -1,0 +1,3 @@
+# detect XAML as a language in github.
+*.xaml linguist-detectable=true
+*.xaml inguist-language=xaml
