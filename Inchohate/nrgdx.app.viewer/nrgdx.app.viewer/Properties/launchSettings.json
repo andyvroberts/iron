@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "nrgdx.app.viewer (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "nrgdx.app.viewer (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
